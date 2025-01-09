@@ -7,14 +7,14 @@ function App() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState([0]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  
+  // fetch API 
   let fetchProducts = async () =>{
     const productsData = await fetch(
       'https://fakestoreapi.com/products');
     const productResponse = await productsData.json();
     setProducts(productResponse);
   };
-
+// add product to cart
   let addToCart = (product) => {
     if (cart.some((item) => item.id === product.id)){
       alert("Product already in the Cart")
@@ -23,7 +23,7 @@ function App() {
       setCart([...cart, product]);
     } 
   }
-
+// calculate total amount
   let removeFromCart = (product) => {
     setCart(cart.filter((item) => item.id !== product.id));
   };
@@ -31,7 +31,7 @@ function App() {
   const calculateTotal = () => {
     return cart.reduce((sum, item) => sum + item.price, 0);
   };
-
+// mount products
   useEffect(() => {
     fetchProducts();
   },[]);
@@ -40,6 +40,7 @@ function App() {
   
   return (
     <>
+      
     <div className='relative'>
     <nav className="w-full flex bg-gray-100 items-center p-6 py-2 justify-between shadow-sm fixed top-0">
         <img
